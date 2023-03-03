@@ -108,6 +108,7 @@ const Model = ({ imageDetails, setCursorVariant }) => {
                 <motion.span variants={letter}>h</motion.span>
                 <motion.span variants={letter}>a</motion.span>
                 <motion.span variants={letter}>r</motion.span>
+                <motion.span variants={letter}>i</motion.span>
                 <motion.span variants={letter}>u</motion.span>
                 <motion.span variants={letter}>k</motion.span>
               </motion.span>

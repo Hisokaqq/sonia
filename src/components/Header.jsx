@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 
@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 
 const Header = ({setCursorVariant}) => {
   const location = useLocation()
+  console.log(location.pathname)
   const shouldAnimate = location.pathname === "/beautifulMe";
   const shouldAnimate2 = location.pathname === "/";
   const HeaderAnim = {
@@ -63,10 +64,12 @@ const Header = ({setCursorVariant}) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
   return (
-    <StyledHeader 
+    <>
+    {/* !location.pathname.includes("/me/") */}
+      <StyledHeader 
       variants={HeaderAnim}
       initial={"initial"}
-      animate={"animate"}
+      animate={!location.pathname.includes("/me/") ? "animate" : "exit"}
       exit={"exit"}
     >
       <div className='container'>
@@ -91,7 +94,7 @@ const Header = ({setCursorVariant}) => {
               className="underl" 
               variants={underl}
               initial="hidden"
-              animate={shouldAnimate ? "visible" : "hidden"}
+              animate={shouldAnimate  ? "visible" : "hidden"}
               exit="exit"
               transition={{ duration: 0.5 }}
             />
@@ -99,13 +102,15 @@ const Header = ({setCursorVariant}) => {
         </div>
       </div>
     </StyledHeader>
+  
+    </>
   );
 };
 
 const StyledHeader = styled(motion.header)`
     font-size: 16px;
     position: fixed;
-    z-index: 99;
+    z-index: 3;
     width: 100%;
     font-weight: "700";
     .underl{

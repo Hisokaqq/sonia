@@ -8,6 +8,7 @@ import "./App.scss";
 import Header from "./components/Header";
 import Cursor from "./components/Cursor";
 import { useEffect, useState } from "react";
+import Me from "./screens/Me";
 
 function App() {
   const location = useLocation();
@@ -20,7 +21,7 @@ function App() {
     width: 640,
     height: 640,
   };
-
+  
   
   return (
     <div className="App">
@@ -40,6 +41,7 @@ function App() {
             element={<Model imageDetails={imageDetails} setCursorVariant={setCursorVariant} />}
           />
           <Route path="/beautifulMe" element={<Photos setCursorVariant={setCursorVariant} />} />
+          <Route path="/me/:id" element={<Me setCursorVariant={setCursorVariant} />} />
         </Routes>
       </AnimatePresence>
     </div>

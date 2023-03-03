@@ -83,10 +83,11 @@ const Home = ({ imageDetails, image , setCursorVariant}) => {
               variants={textAnim}
               
               className='information'>
-              <div className='title' onMouseEnter={()=>setCursorVariant("image")} onMouseLeave={()=>setCursorVariant("default")}>Sophie Honcharyck</div>
+              <div className='title' onMouseEnter={()=>setCursorVariant("image")} onMouseLeave={()=>setCursorVariant("default")}>Sophia Honchariuk</div>
               <div className='location' onMouseEnter={()=>setCursorVariant("image")} onMouseLeave={()=>setCursorVariant("default")}>
-                <LettersAnimation text={28.538336}/>
-                <LettersAnimation text={12.1231}/>
+              {/* ˚´“ */}
+                <LettersAnimation text={`48˚ 11´ 8.280“N`}/>
+                <LettersAnimation text={`16 20´ 5.400“E`}/>
               </div>
             </motion.div>
           </div>
@@ -135,7 +136,6 @@ const StyledHome = styled(motion.div)`
 
                     .location {
                         display: flex;
-                        gap: 15px;
                     }
                 }
             }

@@ -3,7 +3,8 @@ import styled from 'styled-components';
 const LettersAnimation = ({text}) => {
   const [intervalID, setIntervalID] = useState(null);
 
-  const letters = ".-1234567890";
+  const letters = ".-1234567890 ˚´“NE";
+
 
   const handleMouseOver = event => {  
     let iteration = 0;
@@ -19,6 +20,7 @@ const LettersAnimation = ({text}) => {
           }
 
           return letters[Math.floor(Math.random() * 12)];
+
         })
         .join("");
 
@@ -55,7 +57,8 @@ const StyledAnim = styled.h1`
     all: unset;
     font-family: 'Nanum Gothic', sans-serif;
     font-weight: 700;
-    width: 4.5rem;
+    width: 7rem;
+    font-size: .8rem;
     text-align: end;
     color: black;
     margin-right: .1rem;
