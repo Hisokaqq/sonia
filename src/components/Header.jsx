@@ -6,15 +6,35 @@ import { motion } from "framer-motion";
 
 
 
+
 const Header = ({setCursorVariant}) => {
   const location = useLocation()
   const shouldAnimate = location.pathname === "/beautifulMe";
   const shouldAnimate2 = location.pathname === "/";
+  const HeaderAnim = {
+    initial: {
+      y: -300,
+      
+    },
+    animate:{
+      y: 0,
+      transition:{
+        duration: 1,
+        delay: shouldAnimate2 ? 0 : .6
+      }
+    },
+    exit:{
+      y: -300,
+      transition:{
+        duration: 3
+      }
+    }
+  }
   const underl = {
     hidden: { scaleX: 0 },
     visible: { scaleX: 1,
     transition:{
-      delay:shouldAnimate2 ? 1.3 : 1.7
+      delay:shouldAnimate2 ? 1.3 : 1.9
     }
     },
     exit: {  scaleX: 0 }
@@ -43,7 +63,12 @@ const Header = ({setCursorVariant}) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
   return (
-    <StyledHeader >
+    <StyledHeader 
+      variants={HeaderAnim}
+      initial={"initial"}
+      animate={"animate"}
+      exit={"exit"}
+    >
       <div className='container'>
         <div className='row space-between'>
           <div className='logo' onMouseEnter={()=>setCursorVariant("ancher")} onMouseLeave={()=>setCursorVariant("default")}>

@@ -24,11 +24,13 @@ function App() {
   
   return (
     <div className="App">
-      <Header setCursorVariant={setCursorVariant} />
       <Cursor cursorVariant={cursorVariant} setCursorVariant={setCursorVariant} />
+      <Header  setCursorVariant={setCursorVariant} />
 
       <AnimatePresence mode={ "wait"}>
         <Routes location={ location} key={location.pathname}>
+          
+
           <Route
             path="/"
             element={<Home imageDetails={imageDetails} setCursorVariant={setCursorVariant} />}

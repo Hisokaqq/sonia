@@ -27,8 +27,9 @@ const Photos = () => {
   }, [canScroll]);
 
   return (
-    <StyledPhotos>
-  
+    <StyledPhotos
+    onAnimationComplete={() => setCanScroll(true)}>
+        
         {!canScroll && (
           <motion.div
             key="first-box"
@@ -67,6 +68,7 @@ const StyledPhotos = styled(motion.div)`
     width: 50%;
     height: 100vh;
     background-color: black;
+    z-index: 200;
     
   }
   .second-box{

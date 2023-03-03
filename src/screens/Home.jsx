@@ -12,12 +12,27 @@ const imageAnim = {
   },
   animate: {
     opacity: 1,
-    transition: {...transition, duration:.6}
+    transition: {...transition, duration:.9}
   },
   exit: {
     opacity: 0,
-    transition: {...transition, duration:.2}
-
+    transition: {...transition, duration:.2, delay: .4}
+  }
+}
+const textAnim = {
+  initial: {
+    opacity: 0,
+    y: -100,
+  },
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: {...transition, duration:1, delay: .5}
+  },
+  exit: {
+    opacity: 0,
+    y: -100,
+    transition: {...transition, duration:.7}
   }
 }
 const Home = ({ imageDetails, image , setCursorVariant}) => {
@@ -25,7 +40,10 @@ const Home = ({ imageDetails, image , setCursorVariant}) => {
 
   return(
   <>
-    <StyledHome>
+    <StyledHome initial="initial"
+                        animate="animate"
+                        exit="exit"
+                        >
       <div className='container'>
         <div className='row center'>
           <div className='image-container'>
@@ -35,6 +53,7 @@ const Home = ({ imageDetails, image , setCursorVariant}) => {
               style={{
                 width: imageDetails.width,
                 height: imageDetails.height,
+                zIndex: 2,
               }}>
               <div className='frame'>
                 <Link to={`/model/`} onMouseEnter={()=>{setCursorVariant("image") 
@@ -61,8 +80,8 @@ const Home = ({ imageDetails, image , setCursorVariant}) => {
               </div>
             </div>
             <motion.div
-              exit={ { opacity: 0 }}
-              transition={transition}
+              variants={textAnim}
+              
               className='information'>
               <div className='title' onMouseEnter={()=>setCursorVariant("image")} onMouseLeave={()=>setCursorVariant("default")}>Sophie Honcharyck</div>
               <div className='location' onMouseEnter={()=>setCursorVariant("image")} onMouseLeave={()=>setCursorVariant("default")}>
@@ -81,7 +100,7 @@ const Home = ({ imageDetails, image , setCursorVariant}) => {
 
 
 
-const StyledHome = styled.main`
+const StyledHome = styled(motion.div)`
 
     .container {
         position: relative;
@@ -99,6 +118,7 @@ const StyledHome = styled.main`
 
                     .frame {
                         img {
+                            
                             width: 100%;
                         }
                     }
