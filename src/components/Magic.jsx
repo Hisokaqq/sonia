@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import "./Magic.scss"
 
 
@@ -15,6 +15,7 @@ const MagicStars = () => {
 
       star.style.animation = "none";
       const offsetHeight = star.offsetHeight;
+      
       star.style.animation = "";
     }
     

@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { motion, useViewportScroll, useTransform, useScroll } from "framer-motion";
+import { motion, useTransform, useScroll } from "framer-motion";
 import styled from "styled-components";
 import MagicStars from "../components/Magic";
-import { useLocation } from "react-router-dom";
 import { useInView } from "react-intersection-observer";
 const transition = { duration: .6, ease: [0, 0.13, 0.23, 1] };
 
@@ -71,7 +70,6 @@ const Model = ({ imageDetails, setCursorVariant }) => {
   const opacity2 = useTransform(scrollYProgress, [0, 1], [0,1])
   
   const { ref, inView } = useInView({ triggerOnce: true, threshold: .1});
-  const { ref2, inView2 } = useInView({ triggerOnce: true, threshold: .1 });
   return (
     <StyledModel
       onAnimationComplete={() => setCanScroll(true)}

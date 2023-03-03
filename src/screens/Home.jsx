@@ -1,6 +1,6 @@
-import * as React from "react";
-import { Link, useLocation } from "react-router-dom";
-import { animate, motion } from "framer-motion";
+import  React, {useState} from "react";
+import { Link } from "react-router-dom";
+import {  motion } from "framer-motion";
 import ProgressiveImage from "react-progressive-image";
 import styled from "styled-components";
 import LettersAnimation from "../components/Code";
@@ -21,9 +21,7 @@ const imageAnim = {
   }
 }
 const Home = ({ imageDetails, image , setCursorVariant}) => {
-  const location = useLocation();
-  const [t, setT] = React.useState(true)
-  console.log(t)
+  const [t, setT] = useState(true)
 
   return(
   <>
