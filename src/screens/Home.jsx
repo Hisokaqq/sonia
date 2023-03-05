@@ -84,7 +84,7 @@ const Home = ({ imageDetails, image , setCursorVariant}) => {
               variants={textAnim}
               
               className='information'>
-              <div className='title' onMouseEnter={()=>setCursorVariant("image")} onMouseLeave={()=>setCursorVariant("default")}>Sophia Honchariuk</div>
+              <div className='title' onMouseEnter={()=>setCursorVariant("image")} onMouseLeave={()=>setCursorVariant("default")}>Sofia Honchariuk</div>
               <div className='location' onMouseEnter={()=>setCursorVariant("image")} onMouseLeave={()=>setCursorVariant("default")}>
               {/* ˚´“ */}
                 <LettersAnimation text={`48°11'12.45" N`}/>

@@ -95,24 +95,15 @@ const Model = ({ imageDetails, setCursorVariant }) => {
             </motion.div>
             <motion.div  className='model' style={{x:x, opacity:opacity}}>
               <motion.span className='first' variants={firstName}>
-                <motion.span variants={letter}>S</motion.span>
-                <motion.span variants={letter}>o</motion.span>
-                <motion.span variants={letter}>p</motion.span>
-                <motion.span variants={letter}>h</motion.span>
-                <motion.span variants={letter}>i</motion.span>
-                <motion.span variants={letter}>a</motion.span>
+                {"Sofia".split('').map((l, id) => (
+                  <motion.span key={id} variants={letter}>{l}</motion.span>
+                ))}
               </motion.span>
               <motion.span className='last' variants={lastName}>
-                <motion.span variants={letter}>H</motion.span>
-                <motion.span variants={letter}>o</motion.span>
-                <motion.span variants={letter}>n</motion.span>
-                <motion.span variants={letter}>c</motion.span>
-                <motion.span variants={letter}>h</motion.span>
-                <motion.span variants={letter}>a</motion.span>
-                <motion.span variants={letter}>r</motion.span>
-                <motion.span variants={letter}>i</motion.span>
-                <motion.span variants={letter}>u</motion.span>
-                <motion.span variants={letter}>k</motion.span>
+              {"Honchariuk".split('').map((l, id) => (
+                <motion.span key={id} variants={letter}>{l}</motion.span>
+              ))}
+            
               </motion.span>
             </motion.div>
           </div>
