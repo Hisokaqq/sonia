@@ -47,7 +47,9 @@ const letter = {
 const main = {
   exit: {
     opacity: 0,
-    transition: { duration: 0.1},
+    scale:0,
+    y: -300,
+    transition: { duration: .5},
   }
 }
 const Model = ({ imageDetails, setCursorVariant }) => {
@@ -91,7 +93,7 @@ const Model = ({ imageDetails, setCursorVariant }) => {
               className='details'>
               
             </motion.div>
-            <motion.div onMouseEnter={()=>setCursorVariant("image")} onMouseLeave={()=>setCursorVariant("default")} className='model' style={{x:x, opacity:opacity}}>
+            <motion.div  className='model' style={{x:x, opacity:opacity}}>
               <motion.span className='first' variants={firstName}>
                 <motion.span variants={letter}>S</motion.span>
                 <motion.span variants={letter}>o</motion.span>

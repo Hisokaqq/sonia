@@ -50,6 +50,14 @@ const Cursor = ({cursorVariant , setCursorVariant}) => {
             height:cursorsize3,
             width: cursorsize3,
         },
+        drag: {
+            x: m_p.x - (cursorsize3/2),
+            y: m_p.y - (cursorsize3/2),
+            transition: { type: 'spring', stiffness: 350, damping: 40 },
+            backgroundColor: "transparent",
+            height:cursorsize3,
+            width: cursorsize3,
+        },
     }
     useEffect(()=>{
         const mouseMove = (e) => {
@@ -66,23 +74,40 @@ const Cursor = ({cursorVariant , setCursorVariant}) => {
     },[])
 
   return (
-    <StyledCursor cursorsize={cursorsize} variants={variants} animate={cursorVariant}>
-        
-    </StyledCursor>
+
+    
+    <StyledCursor drag={cursorVariant!="drag"} cursorsize={cursorsize} variants={variants} animate={cursorVariant}></StyledCursor>
+
   )
 }
 
 const StyledCursor = styled(motion.div)`
     pointer-events: none;
-    background-color: #000;
-    height: ${props => props.cursorsize}px;
-    width: ${props => props.cursorsize}px;
+    height: 30px;
+    width: 30px;
     border-radius: 50%;
     position: fixed;
     top: 0;
     left: 0;
     z-index: 300;
-    
-`
+    background-color: ${props => props.drag ? '#000' : 'transparent'};
+    &:before, &:after {
+        content: '';
+        display: ${props => props.drag ? 'none' : 'block'};
+        position: absolute;
+        background-color: #fff;
+        height: 30px;
+        width: 2px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+    &:before {
+        transform: translate(-50%, -50%) rotate(90deg);
+    }
+`;
+
+
+
 
 export default Cursor

@@ -10,15 +10,16 @@ const GalerieAnim = {
     initial: {
         scale: 0,
         opacity: 0,
-        
     },
     animate: {
         scale: 1,
         opacity: 1,
-        
         transition: {
+            staggerChildren: 0.5,
             duration: 1,
             delay: 1.3,
+            when: "beforeChildren",
+            
         }
     },
     exit: {
@@ -30,6 +31,9 @@ const GalerieAnim = {
         }
     }
 }
+
+
+
 
 const Galerie = ({setCursorVariant}) => {
     const [image, setImage] = useState(null)
@@ -96,7 +100,6 @@ const Galerie = ({setCursorVariant}) => {
     const imgRef2 = useRef(null)
     const imgRef3 = useRef(null)
     const [navigating, setNavigating] = useState(false)
-
   return (
     <>
         <StyledGalerie
@@ -104,8 +107,11 @@ const Galerie = ({setCursorVariant}) => {
     initial="initial"
     animate="animate"
     exit="exit"
+
     >
-    <div className='item'>
+    
+    <div  className='item' 
+    >
         <div className='text-line'>
             <Link to={"/me/1"}
             onMouseEnter={()=>{

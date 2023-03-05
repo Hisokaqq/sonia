@@ -1,5 +1,5 @@
-import React, {useEffect} from "react";
-import { Link, useLocation, useParams } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 
@@ -9,7 +9,18 @@ import { motion } from "framer-motion";
 
 const Header = ({setCursorVariant}) => {
   const location = useLocation()
-  console.log(location.pathname)
+  const prevPath = localStorage.getItem('previousPathname') ? localStorage.getItem('previousPathname') : "";
+  const [howTo, setHowTo] = useState(null) 
+  useEffect(() => {
+    const currentPathname = window.location.pathname;
+    if(((prevPath==="/" && location.pathname==="/") ||(prevPath!=="/beautifulMe" && location.pathname==="/"))) setHowTo(1)
+    else if(location.pathname==="/beautifulMe") setHowTo(3)
+    console.log(howTo)
+    // setSc(location.pathname.includes("/me/")||  (location.pathname=="/beautifulMe" && prevPath.includes("/me/")))
+
+    localStorage.setItem('previousPathname', currentPathname);
+  }, [location, howTo]);
+
   const shouldAnimate = location.pathname === "/beautifulMe";
   const shouldAnimate2 = location.pathname === "/";
   const HeaderAnim = {
@@ -17,25 +28,31 @@ const Header = ({setCursorVariant}) => {
       y: -300,
       
     },
+    initials: {
+      x: 300,
+      
+    },
     animate:{
       y: 0,
       transition:{
         duration: 1,
-        delay: shouldAnimate2 ? 0 : .6
+        delay: !prevPath.includes("/me/") ? 0 : 1.6
       }
     },
+    
     exit:{
       y: -300,
       transition:{
         duration: 3
       }
-    }
+    },
+   
   }
   const underl = {
     hidden: { scaleX: 0 },
     visible: { scaleX: 1,
     transition:{
-      delay:shouldAnimate2 ? 1.3 : 1.9
+      delay: howTo
     }
     },
     exit: {  scaleX: 0 }
@@ -63,10 +80,11 @@ const Header = ({setCursorVariant}) => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
   return (
     <>
-    {/* !location.pathname.includes("/me/") */}
-      <StyledHeader 
+      {howTo &&
+        <StyledHeader 
       variants={HeaderAnim}
       initial={"initial"}
       animate={!location.pathname.includes("/me/") ? "animate" : "exit"}
@@ -101,9 +119,9 @@ const Header = ({setCursorVariant}) => {
           </div>
         </div>
       </div>
-    </StyledHeader>
-  
+    </StyledHeader>}
     </>
+  
   );
 };
 
@@ -113,6 +131,8 @@ const StyledHeader = styled(motion.header)`
     z-index: 3;
     width: 100%;
     font-weight: "700";
+    pointer-events: none;
+    
     .underl{
       position: absolute;
   bottom: -10px;
@@ -122,19 +142,24 @@ const StyledHeader = styled(motion.header)`
   background: black;
     }
     .container {
-        .row {
-            height: 128px;
-            /* .active::before {
-  content: "";
-  position: absolute;
-  bottom: -10px;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background: black;
-  transform: scaleX(.1);
-  animation: slide-in 1s ease-out  forwards;
-} */
+      .exit{
+        justify-content: flex-end;
+        background-color: red;
+        .a{
+        pointer-events: auto;
+
+        }
+
+        
+        
+        
+      }
+      .row {
+        height: 128px;
+        overflow: hidden;
+          
+
+            
 
 @keyframes slide-in {
   100% {
@@ -145,6 +170,8 @@ const StyledHeader = styled(motion.header)`
 
             .logo {
                 position: relative;
+        pointer-events: auto;
+
                 img {
                     height: 25px;
                     margin-bottom: -3.8px;
@@ -152,11 +179,14 @@ const StyledHeader = styled(motion.header)`
 
                 }
 
-                a {
+                .a {
                     color: $black;
                     text-decoration: none;
                     padding: 5px 10px;
+        pointer-events: auto;
+
                 }
+                
             }
 
             .menu {

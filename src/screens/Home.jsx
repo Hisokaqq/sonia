@@ -4,6 +4,7 @@ import {  motion } from "framer-motion";
 import ProgressiveImage from "react-progressive-image";
 import styled from "styled-components";
 import LettersAnimation from "../components/Code";
+
 const transition = { duration: .6, ease: [0, 0.13, 0.23, 1] };
 
 const imageAnim = {
@@ -56,7 +57,7 @@ const Home = ({ imageDetails, image , setCursorVariant}) => {
                 zIndex: 2,
               }}>
               <div className='frame'>
-                <Link to={`/model/`} onMouseEnter={()=>{setCursorVariant("image") 
+                <Link to={`/model/`} onMouseEnter={()=>{setCursorVariant("ancher") 
               setT(false)}} onMouseLeave={()=>{setCursorVariant("default")
               setT(true)
               }}>
