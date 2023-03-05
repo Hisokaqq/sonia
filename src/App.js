@@ -9,6 +9,7 @@ import Header from "./components/Header";
 import Cursor from "./components/Cursor";
 import { useEffect, useState } from "react";
 import Me from "./screens/Me";
+import Ig from "./components/Ig";
 
 function App() {
   const location = useLocation();
@@ -25,6 +26,7 @@ function App() {
   
   return (
     <div className="App">
+      <Ig setCursorVariant={setCursorVariant}/>
       <Cursor cursorVariant={cursorVariant} setCursorVariant={setCursorVariant} />
       <Header  setCursorVariant={setCursorVariant} />
 

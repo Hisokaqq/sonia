@@ -163,7 +163,7 @@ const Model = ({ imageDetails, setCursorVariant }) => {
           >
             <motion.div 
             ref={ref}
-            animate={inView ? { opacity: 1, y: 0, x: 0 } : { opacity: 0, y: 75, x: -100 }}
+            animate={inView ? { opacity: 1, y: 0, x: 0 } : { opacity: 0, y: 15, x: -100 }}
             transition={{ duration: 1, delay: 0.5 }}
             onMouseEnter={()=>setCursorVariant("text")} onMouseLeave={()=>setCursorVariant("default")} >
             <MagicStars  onMouseEnter={()=>setCursorVariant("text")} onMouseLeave={()=>setCursorVariant("default")}/>

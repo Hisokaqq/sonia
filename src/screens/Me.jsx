@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import styled from 'styled-components'
 import { motion } from 'framer-motion'
 import pic1 from "../images/3.jpg"
@@ -99,6 +99,7 @@ const Me = ({setCursorVariant}) => {
 
         dragConstraints={parentRef}
         dragSnapToOrigin
+        whileHover={{scale:1.5}}
       >
         <motion.img 
         variants={ImgAnim} 
@@ -123,7 +124,7 @@ const StyledClose = styled(MotionLink)`
 
 const StyledMe = styled(motion.div)`
     all: unset;
-
+    overflow: hidden;
    display: grid;
     place-items:  center;
     height: 100vh;

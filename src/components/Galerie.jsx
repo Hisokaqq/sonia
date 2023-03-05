@@ -32,7 +32,20 @@ const GalerieAnim = {
     }
 }
 
-
+const lineAnim = {
+    initial: {
+        width: 0,
+    },
+    animate: {
+        width: "100%",
+        transition:{
+            duration: 3,
+        }
+    },
+    exit: {
+        scaleX: 0,
+    },
+}
 
 
 const Galerie = ({setCursorVariant}) => {
@@ -54,38 +67,26 @@ const Galerie = ({setCursorVariant}) => {
             window.removeEventListener("mousemove", mouseMove)
         }
     },[])
-    const cursorsize = 0
     const [hover, setHover] = useState("noUse")
-    const variants = () => {
-        if (!imgRef) {
+    const floating = () => {
+        if (!imgRef && !textRef) {
           return {
             noUse: {
-              opacity: 0,
-              scale: 0,
-              x: m_p.x,
-              y: m_p.y,
+              x: m_p.x -200,
+              y: m_p.y -200,
             },
-            default: {
-                scale: 1,
-              x: m_p.x,
-              y: m_p.y,
-              transition: { type: "spring", stiffness: 2000, damping: 330 },
-            },
+            
           };
         } else {
           const { x, y, width, height } = imgRef.current.getBoundingClientRect();
+          const xt = (textRef.clientX)
+          const yt = (textRef.clientY)
           return {
-            noUse: {
-              opacity: 0,
-              scale: 0,
-              x: m_p.x,
-              y: m_p.y,
-            },
+            
             default: {
-              scale: 1,
-              x: m_p.x * .2 + x - (imgRef===imgRef3 ? 220 : 100),
-              y: m_p.y * .4 + y  - (imgRef===imgRef3 ? 120 : 50),
-              transition: { type: "spring", stiffness: 300, damping: 30 },
+              x: (x - width/2) + Math.abs(m_p.x - xt) * .05,
+              y: (y - height * 2) + Math.abs(m_p.y - yt) * 2,
+              transition: { type: "spring", stiffness: 350, damping: 90 },
             },
           };
         }
@@ -99,6 +100,7 @@ const Galerie = ({setCursorVariant}) => {
     const imgRef1 = useRef(null)
     const imgRef2 = useRef(null)
     const imgRef3 = useRef(null)
+    const [textRef, setTextRef] = useState(null)
     const [navigating, setNavigating] = useState(false)
   return (
     <>
@@ -110,33 +112,37 @@ const Galerie = ({setCursorVariant}) => {
 
     >
     
-    <div  className='item' 
+    <div variants={lineAnim}  className='item' style={{originX:0, originY:0}}
     >
-        <div className='text-line'>
+        <motion.div className='text-line'>
             <Link to={"/me/1"}
-            onMouseEnter={()=>{
+            onMouseEnter={(e)=>{
                 setCursorVariant("ancher")
                 setHover("default")
                 setImage(pic1)
                 setImgRef(imgRef1)
+                setTextRef(e)
+
             }}
             onMouseLeave={()=>{
                 setCursorVariant("default")
                 setHover("noUse")
                 setImage(null)
                 setImgRef(null)
+                setTextRef(null)
+
 
             }}
             onClick={()=>setNavigating(true)}
-            >48˚ 11´ 8.280“N</Link>
+            >03/01/2022</Link>
             <div className='cont'>
                 <div ref={imgRef1} className='image'>
                     <img src={pic1} alt="pic1" />
                 </div>
-                <div className="line">
-                </div>
+                <motion.div className="line">
+                </motion.div>
             </div>
-        </div>
+        </motion.div>
     </div>
 
 
@@ -145,22 +151,22 @@ const Galerie = ({setCursorVariant}) => {
         <div className='text-line'>
         <div className="line2"></div>
             <Link to={"/me/2"}  
-            onMouseEnter={()=>{
+            onMouseEnter={(e)=>{
                 setCursorVariant("ancher")
                 setHover("default")
                 setImage(pic2)
                 setImgRef(imgRef2)
+                setTextRef(e)
             }}
             onMouseLeave={()=>{
                 setCursorVariant("default")
                 setHover("noUse")
                 setImage(null)
                 setImgRef(null)
-
+                setTextRef(null)
             }}
             onClick={()=>setNavigating(true)}
-
-            >48˚ 11´ 8.280“N</Link>
+            >12/02/2023</Link>
             <div className='cont'>
                 
                 <div ref={imgRef2} className='image'>
@@ -183,22 +189,26 @@ const Galerie = ({setCursorVariant}) => {
                 <div className="line"></div>
             </div>
             <Link to={"/me/3"}  
-            onMouseEnter={()=>{
+            onMouseEnter={(e)=>{
                 setCursorVariant("ancher")
                 setHover("default")
                 setImage(pic3)
                 setImgRef(imgRef3)
+                setTextRef(e)
+
             }}
             onMouseLeave={()=>{
                 setCursorVariant("default")
                 setHover("noUse")
                 setImage(null)
                 setImgRef(null)
+                setTextRef(null)
+
 
             }}
             onClick={()=>setNavigating(true)}
 
-            >48˚ 11´ 8.280“N</Link>
+            >25/03/2022</Link>
             <div className="line2"></div>
             
         </div>
@@ -208,10 +218,10 @@ const Galerie = ({setCursorVariant}) => {
         
     </StyledGalerie>
     {
-        !navigating &&
-        <StyledFM variants={variants()} animate={hover}>
-        <div className='image-cont'>
-            <img src={image}  />
+       ( !navigating ) && 
+        <StyledFM  variants={floating()} animate={hover}>
+        <div className='image-cont' >
+            <img src={image}  alt=""/>
         </div>
     </StyledFM>}
 </>
@@ -222,17 +232,15 @@ const Galerie = ({setCursorVariant}) => {
 const StyledFM = styled(motion.div)`
     pointer-events: none;
     width: 400px;
-    width: 400px;
-    border-radius: 50%;
+    height: 400px;
     position: fixed;
     top: -30%;
     left: -400px;
+    top: 0;
+    left: 0;
     z-index: 5;
+    /* background-color: red; */
     .image-cont{ 
-        top: 0;
-        right: -3rem;
-        width: 400px;
-        margin: 0 76%;
         img{
             width: 100%;
             height: 100%;
@@ -252,11 +260,13 @@ const StyledGalerie = styled(motion.div)`
     /* background-color: white; */
     transform-origin: center;
     a {
+        
   font-style: normal;
   font-family: 'Roboto', sans-serif;
   font-weight: 500;
   font-size: 60px;
-  line-height: 2.3rem;
+  height: 2.4rem;
+  padding: 1rem 0;
   position: relative;
   text-fill-color: black;
   -webkit-text-fill-color: black;

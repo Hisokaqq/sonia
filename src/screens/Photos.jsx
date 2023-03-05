@@ -26,7 +26,7 @@ const Photos = ({setCursorVariant}) => {
       document.querySelector("body").classList.remove("no-scroll");
     }
   }, [canScroll]);
-
+  
   return (
     <StyledPhotos
     onAnimationComplete={() => setCanScroll(true)}>

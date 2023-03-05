@@ -21,6 +21,8 @@ const Cursor = ({cursorVariant , setCursorVariant}) => {
             y: m_p.y - (cursorsize/2),
             transition: { type: 'spring', stiffness: 1000, damping: 40 },
             backgroundColor: "#000",
+            height:cursorsize,
+            width: cursorsize,
         },
         text: {
             x: m_p.x - (cursorsize2/2),
@@ -34,12 +36,13 @@ const Cursor = ({cursorVariant , setCursorVariant}) => {
             // mixBlendMode: "difference"
         },
         ancher: {
-            x: m_p.x - (cursorsize2/2),
-            y: m_p.y - (cursorsize2/2),
+            x: m_p.x - (cursorsize/2),
+            y: m_p.y - (cursorsize/2),
             transition: { type: 'spring', stiffness: 1000, damping: 40 },
-            backgroundColor: "#000",
-            height:cursorsize2,
-            width: cursorsize2,
+            backgroundColor: "transparent",
+            border: "1px solid black",
+            height:cursorsize,
+            width: cursorsize,
         },
         image: {
             x: m_p.x - (cursorsize3/2),
@@ -76,7 +79,7 @@ const Cursor = ({cursorVariant , setCursorVariant}) => {
   return (
 
     
-    <StyledCursor drag={cursorVariant!="drag"} cursorsize={cursorsize} variants={variants} animate={cursorVariant}></StyledCursor>
+    <StyledCursor drag={cursorVariant!=="drag"} cursorsize={cursorsize} variants={variants} animate={cursorVariant}></StyledCursor>
 
   )
 }

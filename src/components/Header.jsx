@@ -14,12 +14,13 @@ const Header = ({setCursorVariant}) => {
   useEffect(() => {
     const currentPathname = window.location.pathname;
     if(((prevPath==="/" && location.pathname==="/") ||(prevPath!=="/beautifulMe" && location.pathname==="/"))) setHowTo(1)
+    else if(prevPath==="/model/" && location.pathname==="/beautifulMe") setHowTo(3)
     else if(location.pathname==="/beautifulMe") setHowTo(3)
-    console.log(howTo)
+    // else if(location.pathname==="/model/") setHowTo(2)
     // setSc(location.pathname.includes("/me/")||  (location.pathname=="/beautifulMe" && prevPath.includes("/me/")))
 
     localStorage.setItem('previousPathname', currentPathname);
-  }, [location, howTo]);
+  }, [location, howTo, prevPath]);
 
   const shouldAnimate = location.pathname === "/beautifulMe";
   const shouldAnimate2 = location.pathname === "/";
@@ -57,55 +58,29 @@ const Header = ({setCursorVariant}) => {
     },
     exit: {  scaleX: 0 }
   };
-  
-  useEffect(() => {
-    const handleScroll = () => {
-      const row = document.querySelector(".row");
-      const header = document.querySelector("header");
-
-      // Get scroll position
-      const scrollY = window.scrollY;
-
-      // Set row height based on scroll position
-      row.style.height = `${Math.max(128 - scrollY, 0)}px`;
-
-      // Set header position to fixed after scrolling past initial position
-      if (scrollY >= 128) {
-        header.classList.add("fixed");
-      } else {
-        header.classList.remove("fixed");
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
     <>
       {howTo &&
         <StyledHeader 
       variants={HeaderAnim}
       initial={"initial"}
-      animate={!location.pathname.includes("/me/") ? "animate" : "exit"}
+      animate={(!location.pathname.includes("/me/")) ? "animate" : "exit"}
       exit={"exit"}
     >
       <div className='container'>
         <div className='row space-between'>
-          <div className='logo' onMouseEnter={()=>setCursorVariant("ancher")} onMouseLeave={()=>setCursorVariant("default")}>
-            <Link to='/' > 
-                {/* <img src={require("../images/ig.png")}/> */}
-                @s.honchariuk
-                </Link>
-                <motion.div 
-              className="underl" 
-              variants={underl}
-              initial="hidden"
-              animate={shouldAnimate2 ? "visible" : "hidden"}
-              exit="exit"
-              transition={{ duration: 0.5 }}
+        <div className={`logo `} onMouseEnter={()=>setCursorVariant("ancher")} onMouseLeave={()=>setCursorVariant("default")}>
+            <Link to='/'>@s.honchariuk</Link>
+            <motion.div 
+               className="underl" 
+               variants={underl}
+               initial="hidden"
+               animate={shouldAnimate2 ? "visible" : "hidden"}
+               exit="exit"
+               transition={{ duration: 0.5 }}
             />
           </div>
+          
           <div className={`logo `} onMouseEnter={()=>setCursorVariant("ancher")} onMouseLeave={()=>setCursorVariant("default")}>
             <Link to='/beautifulMe'>More Photos</Link>
             <motion.div 
@@ -126,6 +101,10 @@ const Header = ({setCursorVariant}) => {
 };
 
 const StyledHeader = styled(motion.header)`
+    a{
+      padding: 1rem 1.5rem;
+      z-index: 5;
+    }
     font-size: 16px;
     position: fixed;
     z-index: 3;
@@ -135,25 +114,14 @@ const StyledHeader = styled(motion.header)`
     
     .underl{
       position: absolute;
-  bottom: -10px;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background: black;
+      bottom: -10px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: black;
     }
     .container {
-      .exit{
-        justify-content: flex-end;
-        background-color: red;
-        .a{
-        pointer-events: auto;
-
-        }
-
-        
-        
-        
-      }
+      
       .row {
         height: 128px;
         overflow: hidden;
@@ -166,11 +134,10 @@ const StyledHeader = styled(motion.header)`
     transform: translateX(0);
   }
 }
-
-
             .logo {
                 position: relative;
-        pointer-events: auto;
+                pointer-events: auto;
+                
 
                 img {
                     height: 25px;
