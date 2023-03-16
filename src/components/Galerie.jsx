@@ -259,6 +259,11 @@ const StyledGalerie = styled(motion.div)`
     left: 10%;
     /* background-color: white; */
     transform-origin: center;
+    @media (max-width: 704px) {
+        width: 100%;
+        left: 0;
+        padding: 0;
+                    }
     a {
         
   font-style: normal;
@@ -270,9 +275,13 @@ const StyledGalerie = styled(motion.div)`
   position: relative;
   text-fill-color: black;
   -webkit-text-fill-color: black;
-    -webkit-text-stroke: 1px black;
-    text-stroke: 1px black;
+  -webkit-text-stroke: 1px black;
+  text-stroke: 1px black;
   transition: all .4s ease-in-out;
+  @media (max-width: 704px) {
+        font-size: 30px;
+        height: .8rem;
+        }
   
   &:hover {
     text-fill-color: transparent;
@@ -334,6 +343,10 @@ const StyledGalerie = styled(motion.div)`
                 right: -3rem;
                 width: 130px;
                 margin: 0 76%;
+                @media (max-width: 704px) {
+                    width: 100px;
+                    margin: 0 40%;
+                    }
                 img{
                     width: 100%;
                     height: 100%;
@@ -420,6 +433,10 @@ const StyledGalerie = styled(motion.div)`
                 right: -3rem;
                 width: 130px;
                 margin: 0 30%;
+                @media (max-width: 704px) {
+                    width: 100px;
+                    margin: 0 10%;
+                    }
                 img{
                     width: 100%;
                     height: 100%;
@@ -506,6 +523,10 @@ const StyledGalerie = styled(motion.div)`
                 right: -3rem;
                 width: 130px;
                 margin: 0 20%;
+                @media (max-width: 704px) {
+                    width: 100px;
+                    margin: 0 10%;
+                    }
                 img{
                     width: 100%;
                     height: 100%;

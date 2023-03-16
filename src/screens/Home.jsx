@@ -62,7 +62,7 @@ const Home = ({ imageDetails, image , setCursorVariant}) => {
               setT(true)
               }}>
                   <ProgressiveImage 
-                    src={require("../images/3.jpg")}
+                    src={require("../images/2.webp")}
                     placeholder={require("../images/3.jpg")}>
                     {(src) => (
                       <motion.img
@@ -106,6 +106,7 @@ const StyledHome = styled(motion.div)`
 
     .container {
         position: relative;
+        overflow: hidden;
 
         .row {
             height: 100vh;
@@ -131,12 +132,17 @@ const StyledHome = styled(motion.div)`
                     width: 100%;
                     display: flex;
                     align-items: center;
-                    justify-content: space-between;
                     margin-top: 20px;
+                    justify-content: space-between;
                     text-transform: uppercase;
+                    @media (max-width: 654px) {
+                      flex-direction: column;
+                      gap: 1rem;
+                    }
 
                     .location {
                         display: flex;
+                        
                     }
                 }
             }

@@ -139,6 +139,10 @@ const StyledMe = styled(motion.div)`
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    @media (max-width: 704px) {
+                    width: 20rem;
+                    height: 20rem;
+                    }
 ;
 
     img {
@@ -146,6 +150,10 @@ const StyledMe = styled(motion.div)`
       height: 40rem;
       object-fit: contain;
       pointer-events: none;
+      @media (max-width: 704px) {
+                    width: 20rem;
+                    height: 20rem;
+                    }
 
     }
   }

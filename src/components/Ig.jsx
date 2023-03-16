@@ -18,7 +18,7 @@ const StyledIf = styled(motion.div)`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  z-index: 2;
+  z-index: 5;
   gap: .6rem;
   img{
     width: 2rem;

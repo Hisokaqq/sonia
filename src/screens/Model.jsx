@@ -120,7 +120,7 @@ const Model = ({ imageDetails, setCursorVariant }) => {
                 animate={{
                   y: 0,
                   width: "100%",
-                  height: window.innerWidth > 1440 ? 450 : 130,
+                  height: window.innerWidth > 1440 ? 450 : 330,
                   transition: { delay: 0.5, ...transition },
                 }}
                 className='thumbnail-single'>
@@ -136,7 +136,7 @@ const Model = ({ imageDetails, setCursorVariant }) => {
                     initial={{ scale: 1.1 }}
                     animate={{
                       transition: { delay: 0.2, ...transition },
-                      y: window.innerWidth > 1440 ? -150 : -40,
+                      y: window.innerWidth > 1440 ? -150 : -65,
                     }}
                   />
                 </motion.div>
@@ -189,7 +189,6 @@ export default Model;
 
 
 const StyledModel = styled(motion.div)`
-  overflow: hidden;
   
     .container {
         .top-row {
@@ -288,12 +287,21 @@ const StyledModel = styled(motion.div)`
 .detailed-information {
     margin-top: 100px;
     height: 600px;
-
+   
     .container {
+      
         .row {
             justify-content: space-between;
             align-items: flex-start;
+            overflow: hidden;
 
+            @media (max-width: 654px) {
+                      flex-direction: column;
+                      gap: 1rem;
+                      .Text{
+                        width: 100%;
+                      }
+                    }
             h2 {
                 font-size: 28px;
             }
