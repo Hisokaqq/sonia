@@ -74,12 +74,41 @@ const Cursor = ({cursorVariant , setCursorVariant}) => {
         return () => {
             window.removeEventListener("mousemove", mouseMove)
         }
-    },[])
-
-  return (
+    
 
     
-    <StyledCursor drag={cursorVariant!=="drag"} cursorsize={cursorsize} variants={variants} animate={cursorVariant}></StyledCursor>
+
+    },[])
+    const [open, setOpen] = useState(true)
+    
+    useEffect(() => {
+        // Function to handle window resize
+        const handleResize = () => {
+          if (window.innerWidth < 800) {
+            setOpen(false);
+          } else {
+            setOpen(true);
+          }
+        };
+    
+        // Initial check
+        handleResize();
+    
+        // Attach event listener for window resize
+        window.addEventListener('resize', handleResize);
+    
+        // Clean up the event listener when component unmounts
+        return () => {
+          window.removeEventListener('resize', handleResize);
+        };
+      }, [])
+  return (
+
+
+     open ?
+        <StyledCursor drag={cursorVariant!=="drag"} cursorsize={cursorsize} variants={variants} animate={cursorVariant}></StyledCursor>
+    : null
+    
 
   )
 }
